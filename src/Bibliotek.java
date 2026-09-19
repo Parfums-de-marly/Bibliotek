@@ -1,11 +1,12 @@
+import java.util.List;
+
 void main() {
     Library library = new Library();
 
-    Book[] books = Book_Member_Data.getBooks();
-    Member[] members = Book_Member_Data.getMembers();
+    List<Book> books = Book_Member_Data.getBooks();
+    List<Member> members = Book_Member_Data.getMembers();
 
-
-    for (Member member: members){
+    for (Member member : members){
         library.addMember(member);
     }
 
@@ -15,8 +16,4 @@ void main() {
 
     ConsoleUI consoleUI = new ConsoleUI(library);
     consoleUI.run();
-
-
-
 }
-

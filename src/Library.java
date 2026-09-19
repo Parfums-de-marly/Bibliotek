@@ -1,14 +1,15 @@
+import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 public class Library {
 
-    private ArrayList<Book> books = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<Loan> loans = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
+    private List<Loan> loans = new ArrayList<>();
 
     public Book getBook(int bookId){
       for (Book book : books){
-          if (book.id == bookId){
+          if (book.id() == bookId){
               return book;
           }
       }
@@ -17,7 +18,7 @@ public class Library {
 
     public Member getMember(int memberId){
         for (Member member : members){
-            if (member.memberNum == memberId){
+            if (member.id() == memberId){
                 return member;
             }
         }
@@ -31,7 +32,7 @@ public class Library {
         if (member != null && book != null) {
 
             for (Loan loan : loans) {
-                if (loan.getBook().id == bookId) {
+                if (loan.book().id() == bookId) {
                     return false;
                 }
             }
@@ -49,7 +50,7 @@ public class Library {
         for (int i = 0; i < loans.size(); i++) {
             Loan loan = loans.get(i);
 
-            if (loan.getBook().id == bookId) {
+            if (loan.book().id() == bookId) {
                 loans.remove(i);
                 return true;
             }
@@ -61,7 +62,7 @@ public class Library {
         ArrayList<Loan> result = new ArrayList<>();
 
         for (Loan loan : loans){
-            if (loan.getMember().memberNum == memberId){
+            if (loan.member().id() == memberId){
                 result.add(loan);
             }
         }
@@ -80,15 +81,16 @@ public class Library {
         loans.add(loan);
     }
 
-    public ArrayList<Book> getBooks(){
+    /*
+    public List<Book> getBooks(){
         return books;
     }
 
-    public ArrayList<Member> getMembers(){
+    public List<Member> getMembers(){
         return members;
     }
 
-    public ArrayList<Loan> getLoans(){
+    public List<Loan> getLoans(){
         return loans;
     }
 
@@ -109,6 +111,10 @@ public class Library {
             IO.println(loan);
         }
     }
+
+
+
+     */
 
 
 
