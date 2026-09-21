@@ -81,11 +81,11 @@ public class Library {
         loans.add(loan);
     }
 
-    /*
+
     public List<Book> getBooks(){
         return books;
     }
-
+    /*
     public List<Member> getMembers(){
         return members;
     }
