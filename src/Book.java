@@ -1,14 +1,19 @@
+public class Book extends Resource {
+    private int pages;
 
-public record Book(String author, String title, String ISBN, int id) {
-
-    public String toString(){
-        return String.format("""
-    Author: %s
-    Title: %s
-    ISBN: %s
-    ID: %s
-    """, author, title, ISBN, id);
+    public Book(String identifier, String title,
+                String creator, int pages) {
+        super(identifier, title, creator);
+        this.pages = pages;
     }
 
-}
+    public int getPages() {
+        return pages;
+    }
 
+    @Override
+    public String toString() {
+        return super.toString()
+                + " - " + pages + " sider";
+    }
+}
