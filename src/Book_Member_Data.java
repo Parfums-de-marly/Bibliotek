@@ -11,7 +11,7 @@ public class Book_Member_Data {
 
     public static List<VideoGame> getVideoGames() {
         return List.of(
-                new VideoGame("5701234567890", "Call of duty", "Sony", "Ps4"),
+                new VideoGame("570123456763", "Call of duty", "Sony", "Ps4"),
                 new VideoGame("570895793030", "Minecraft", "Mojang Studios", "PC")
         );
     }

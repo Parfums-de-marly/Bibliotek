@@ -8,6 +8,7 @@ public class Movie extends Resource {
         this.durationMinutes = durationMinutes;
     }
 
+    /*
     public String getDirector() {
         return director;
     }
@@ -15,6 +16,8 @@ public class Movie extends Resource {
     public int getDurationMinutes() {
         return durationMinutes;
     }
+
+     */
 
     @Override
     public String toString() {

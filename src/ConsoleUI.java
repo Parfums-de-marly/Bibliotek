@@ -9,7 +9,7 @@ public class ConsoleUI {
         boolean running = true;
 
         while (running) {
-            IO.println("\n--- Bibliotekssystem ---");
+            IO.println("\nBibliotek");
             IO.println("1. Lån materiale");
             IO.println("2. Aflever materiale");
             IO.println("3. Vis alle lån");
@@ -76,7 +76,6 @@ public class ConsoleUI {
         }
 
         for (Loan loan : library.getLoans()) {
-            IO.println("-");
             IO.println(loan);
         }
     }
@@ -91,28 +90,28 @@ public class ConsoleUI {
             IO.println(resource);
         }
 
-        IO.println("\n--- Bøger ---");
+        IO.println("\nBøger:");
         for (Resource resource : library.getResources()) {
             if (resource instanceof Book) {
                 IO.println(resource);
             }
         }
 
-        IO.println("\n--- Lydbøger ---");
+        IO.println("\nLydbøger:");
         for (Resource resource : library.getResources()) {
             if (resource instanceof AudioBook) {
                 IO.println(resource);
             }
         }
 
-        IO.println("\n--- Film ---");
+        IO.println("\nFilm:");
         for (Resource resource : library.getResources()) {
             if (resource instanceof Movie) {
                 IO.println(resource);
             }
         }
 
-        IO.println("\n--- Videospil ---");
+        IO.println("\nVideospil:");
         for (Resource resource : library.getResources()) {
             if (resource instanceof VideoGame) {
                 IO.println(resource);
@@ -140,7 +139,6 @@ public class ConsoleUI {
         }
 
         for (Loan loan : memberLoans) {
-            IO.println("--------------------");
             IO.println(loan);
         }
     }
