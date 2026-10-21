@@ -1,8 +1,7 @@
 public class VideoGame extends Resource {
     private String platform;
 
-    public VideoGame(String identifier, String title,
-                     String studio, String platform) {
+    public VideoGame(String identifier, String title, String studio, String platform) {
         super(identifier, title, studio);
         this.platform = platform;
     }

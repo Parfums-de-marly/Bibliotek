@@ -5,6 +5,8 @@ void main() {
 
     List<Book> books = Book_Member_Data.getBooks();
     List<Member> members = Book_Member_Data.getMembers();
+    List<VideoGame> VideoGames = Book_Member_Data.getVideoGames();
+    List<AudioBook> AudioBooks = Book_Member_Data.getAudioBooks();
 
     for (Member member : members) {
         library.addMember(member);
@@ -13,6 +15,15 @@ void main() {
     for (Book book : books) {
         library.addResource(book);
     }
+
+    for (VideoGame videogame: VideoGames) {
+        library.addResource(videogame);
+    }
+
+    for (AudioBook audiobook : AudioBooks){
+        library.addResource(audiobook);
+    }
+
 
     ConsoleUI consoleUI = new ConsoleUI(library);
     consoleUI.start();

@@ -76,7 +76,7 @@ public class ConsoleUI {
         }
 
         for (Loan loan : library.getLoans()) {
-            IO.println("--------------------");
+            IO.println("-");
             IO.println(loan);
         }
     }
