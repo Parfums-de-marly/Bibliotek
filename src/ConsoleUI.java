@@ -90,6 +90,35 @@ public class ConsoleUI {
         for (Resource resource : library.getResources()) {
             IO.println(resource);
         }
+
+        IO.println("\n--- Bøger ---");
+        for (Resource resource : library.getResources()) {
+            if (resource instanceof Book) {
+                IO.println(resource);
+            }
+        }
+
+        IO.println("\n--- Lydbøger ---");
+        for (Resource resource : library.getResources()) {
+            if (resource instanceof AudioBook) {
+                IO.println(resource);
+            }
+        }
+
+        IO.println("\n--- Film ---");
+        for (Resource resource : library.getResources()) {
+            if (resource instanceof Movie) {
+                IO.println(resource);
+            }
+        }
+
+        IO.println("\n--- Videospil ---");
+        for (Resource resource : library.getResources()) {
+            if (resource instanceof VideoGame) {
+                IO.println(resource);
+            }
+        }
+
     }
 
     private void showMemberLoans() {

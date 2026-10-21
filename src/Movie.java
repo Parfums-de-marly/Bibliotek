@@ -2,9 +2,7 @@ public class Movie extends Resource {
     private String director;
     private int durationMinutes;
 
-    public Movie(String identifier, String title,
-                 String studio, String director,
-                 int durationMinutes) {
+    public Movie(String identifier, String title, String studio, String director, int durationMinutes) {
         super(identifier, title, studio);
         this.director = director;
         this.durationMinutes = durationMinutes;

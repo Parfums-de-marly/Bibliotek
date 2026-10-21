@@ -5,8 +5,9 @@ void main() {
 
     List<Book> books = Book_Member_Data.getBooks();
     List<Member> members = Book_Member_Data.getMembers();
-    List<VideoGame> VideoGames = Book_Member_Data.getVideoGames();
-    List<AudioBook> AudioBooks = Book_Member_Data.getAudioBooks();
+    List<VideoGame> videoGames = Book_Member_Data.getVideoGames();
+    List<AudioBook> audioBooks = Book_Member_Data.getAudioBooks();
+    List<Movie> movies = Book_Member_Data.getMovies();
 
     for (Member member : members) {
         library.addMember(member);
@@ -16,12 +17,16 @@ void main() {
         library.addResource(book);
     }
 
-    for (VideoGame videogame: VideoGames) {
+    for (VideoGame videogame: videoGames) {
         library.addResource(videogame);
     }
 
-    for (AudioBook audiobook : AudioBooks){
+    for (AudioBook audiobook : audioBooks){
         library.addResource(audiobook);
+    }
+
+    for (Movie movie : movies){
+        library.addResource(movie);
     }
 
 
