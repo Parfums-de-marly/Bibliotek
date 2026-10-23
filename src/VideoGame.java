@@ -6,12 +6,11 @@ public class VideoGame extends Resource {
         this.platform = platform;
     }
 
-    /*
+
     public String getPlatform() {
         return platform;
     }
 
-     */
 
     @Override
     public String toString() {
