@@ -9,12 +9,12 @@ public record Loan(
         return borrowedDate.plusDays(14);
     }
 
-    /*
+
     public boolean isOverdue() {
         return LocalDate.now().isAfter(getDueDate());
     }
 
-     */
+
 
     @Override
     public String toString() {

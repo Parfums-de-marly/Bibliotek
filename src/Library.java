@@ -52,11 +52,12 @@ public class Library {
         return LoanResult.SUCCESS;
     }
 
-    public boolean returnLoan(String identifier) {
+    public boolean returnLoan(String identifier, int memberId) {
         for (int i = 0; i < loans.size(); i++) {
             Loan loan = loans.get(i);
 
-            if (loan.resource().getIdentifier().equals(identifier)) {
+            if (loan.resource().getIdentifier().equals(identifier)
+                    && loan.member().id() == memberId) {
                 loans.remove(i);
                 return true;
             }

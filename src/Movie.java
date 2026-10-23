@@ -1,14 +1,16 @@
 public class Movie extends Resource {
     private String director;
     private int durationMinutes;
+    private String studio;
 
     public Movie(String identifier, String title, String studio, String director, int durationMinutes) {
         super(identifier, title, studio);
-        this.director = director;
         this.durationMinutes = durationMinutes;
+        this.director = director;
+        this.studio = studio;
     }
 
-    /*
+
     public String getDirector() {
         return director;
     }
@@ -17,7 +19,10 @@ public class Movie extends Resource {
         return durationMinutes;
     }
 
-     */
+    public String getStudio(){
+        return studio;
+    }
+
 
     @Override
     public String toString() {
