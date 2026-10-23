@@ -13,13 +13,13 @@ public class Resource {
         return identifier;
     }
 
-    /*
+
     public String getTitle() {
         return title;
     }
 
 
-     */
+
 
     public String getCreator() {
         return creator;
