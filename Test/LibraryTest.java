@@ -13,7 +13,7 @@ class LibraryTest {
 
     @BeforeEach
     void setUp() {
-        library = new Library();
+        library = new Library(new StandardLoanPolicy());
 
         book = new Book(
                 "9783161484100",

@@ -1,7 +1,9 @@
 import java.util.List;
 
 void main() {
-    Library library = new Library();
+
+    LoanPolicy loanPolicy = new StandardLoanPolicy();
+    Library library = new Library(loanPolicy);
 
     List<Book> books = Book_Member_Data.getBooks();
     List<Member> members = Book_Member_Data.getMembers();

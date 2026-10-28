@@ -18,8 +18,9 @@ class LoanTest {
 
         Member member = new Member("Jens Jensen", 1);
         LocalDate borrowedDate = LocalDate.of(2026, 10, 1);
+        LocalDate dueDate = LocalDate.of(2026, 10, 1);
 
-        Loan loan = new Loan(book, member, borrowedDate);
+        Loan loan = new Loan(book, member, borrowedDate, dueDate);
 
         assertSame(book, loan.resource());
         assertEquals(member, loan.member());
@@ -37,8 +38,9 @@ class LoanTest {
 
         Member member = new Member("Jens Jensen", 1);
         LocalDate borrowedDate = LocalDate.of(2026, 10, 1);
+        LocalDate dueDate = LocalDate.of(2026, 10, 1);
 
-        Loan loan = new Loan(book, member, borrowedDate);
+        Loan loan = new Loan(book, member, borrowedDate, dueDate);
 
         assertEquals(
                 LocalDate.of(2026, 10, 15),
