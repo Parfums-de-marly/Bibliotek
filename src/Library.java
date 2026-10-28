@@ -6,6 +6,11 @@ public class Library {
     private final List<Resource> resources = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
     private final List<Loan> loans = new ArrayList<>();
+    private final LoanPolicy loanPolicy;
+
+    public Library(LoanPolicy loanPolicy){
+        this.loanPolicy = loanPolicy;
+    }
 
     public Resource getResource(String identifier) {
         for (Resource resource : resources) {
@@ -40,16 +45,27 @@ public class Library {
             return LoanResult.RESOURCE_NOT_REGISTERED;
         }
 
+
         for (Loan loan : loans) {
             if (loan.resource().getIdentifier().equals(identifier)) {
                 return LoanResult.RESOURCE_ALREADY_LOANED;
             }
         }
 
-        Loan loan = new Loan(resource, member, LocalDate.now());
+        if (!loanPolicy.canLoan(resource, loans, member)){
+            return LoanResult.NOT_PERMITTED;
+        }
+
+        LocalDate borrowedDate = LocalDate.now();
+
+        LocalDate dueDate = loanPolicy.calculateDueDate(resource, borrowedDate);
+
+
+        Loan loan = new Loan(resource, member, borrowedDate, dueDate);
         loans.add(loan);
 
         return LoanResult.SUCCESS;
+
     }
 
     public boolean returnLoan(String identifier, int memberId) {
