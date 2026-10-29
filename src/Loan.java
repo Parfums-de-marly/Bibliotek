@@ -3,18 +3,13 @@ import java.time.LocalDate;
 public record Loan(
         Resource resource,
         Member member,
-        LocalDate borrowedDate
+        LocalDate borrowedDate,
+        LocalDate dueDate
 ) {
     public LocalDate getDueDate() {
-        return borrowedDate.plusDays(14);
+        return dueDate;
     }
 
-    /*
-    public boolean isOverdue() {
-        return LocalDate.now().isAfter(getDueDate());
-    }
-
-     */
 
     @Override
     public String toString() {

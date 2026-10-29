@@ -56,16 +56,20 @@ public class ConsoleUI {
         }
     }
 
+
     private void returnResource() {
         IO.println("Indtast materialets ISBN/EAN:");
         String identifier = IO.readln();
 
-        boolean returned = library.returnLoan(identifier);
+        IO.println("Indtast medlemmets ID:");
+        int memberId = Integer.parseInt(IO.readln());
+
+        boolean returned = library.returnLoan(identifier, memberId);
 
         if (returned) {
             IO.println("Materialet er afleveret.");
         } else {
-            IO.println("Der findes ikke et aktivt lån for materialet.");
+            IO.println("Der findes ikke et aktivt lån for dette materiale og medlem.");
         }
     }
 
