@@ -90,6 +90,14 @@ public class Library {
         resources.add(resource);
     }
 
+    public List<Member> getMembers() {
+        return List.copyOf(members);
+    }
+
+    public void addLoan(Loan loan) {
+        loans.add(loan);
+    }
+
     public List<Resource> getResources() {
         return List.copyOf(resources);
     }
