@@ -30,9 +30,4 @@ bin/
 .DS_Store
 
 # Bibliotekets CSV-data
-/audioBook.csv
-/books.csv
-/loans.csv
-/member.csv
-/movie.csv
-/videoGame.csv
+/*.csv

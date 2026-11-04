@@ -52,6 +52,9 @@ public class LibraryLoader {
             String line;
 
             while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) {
+                    continue;
+                }
                 result.add(mapperFunction.apply(line));
             }
         }

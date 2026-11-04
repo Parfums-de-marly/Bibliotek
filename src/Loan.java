@@ -21,6 +21,6 @@ public record Loan(
         return resource
                 + "\nLåner: " + member.name()
                 + "\nLånedato: " + borrowedDate
-                + "\nAfleveringsfrist: " + getDueDate();
+                + "\nAfleveringsfrist: " + dueDate;
     }
 }

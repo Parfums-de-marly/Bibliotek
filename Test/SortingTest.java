@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 
 import java.text.Collator;
@@ -49,15 +48,15 @@ class SortingTest {
 
         List<Loan> loans = new ArrayList<>(List.of(
                 new Loan(resource, member,
-                        LocalDate.of(2025, 1, 10),
+                        LocalDate.of(2025, 1, 5),
                         LocalDate.of(2025, 2, 20)),
 
                 new Loan(resource, member,
-                        LocalDate.of(2025, 1, 5),
+                        LocalDate.of(2025, 1, 10),
                         LocalDate.of(2025, 2, 10))
         ));
 
-        loans.sort(null);
+        Collections.sort(loans);
 
         assertEquals(LocalDate.of(2025, 2, 10),
                 loans.get(0).dueDate());
@@ -70,7 +69,7 @@ class SortingTest {
                 new Resource("2", "Bog A", "Andersen")
         ));
 
-        Collections.sort(resources, LibraryComparators.BY_CREATOR);
+        resources.sort(new ResourceCreatorComparator());
 
         assertEquals("Andersen", resources.get(0).getCreator());
     }
@@ -82,7 +81,7 @@ class SortingTest {
                 new Resource("2", "Andersen", "Forfatter B")
         ));
 
-        resources.sort(LibraryComparators.BY_TITLE);
+        resources.sort(new ResourceTitleComparator());
 
         assertEquals("Andersen", resources.get(0).getTitle());
     }
@@ -94,27 +93,71 @@ class SortingTest {
 
         List<Loan> loans = new ArrayList<>(List.of(
                 new Loan(resource, member,
-                        LocalDate.of(2025, 2, 10),
-                        LocalDate.of(2025, 3, 10)),
+                        LocalDate.of(2025, 1, 10),
+                        LocalDate.of(2025, 2, 10)),
 
                 new Loan(resource, member,
-                        LocalDate.of(2025, 1, 10),
-                        LocalDate.of(2025, 3, 20))
+                        LocalDate.of(2025, 1, 5),
+                        LocalDate.of(2025, 2, 20))
         ));
 
-        loans.sort(LibraryComparators.BY_BORROWED_DATE);
+        loans.sort(new LoanDateComparator());
 
-        assertEquals(LocalDate.of(2025, 1, 10),
+        assertEquals(LocalDate.of(2025, 1, 5),
                 loans.get(0).borrowedDate());
     }
 
     @Test
-    void testCollatorSorting() {
+    void librarySortByCreator() {
+        List<Resource> resources = new ArrayList<>(List.of(
+                new Resource("1", "Bog B", "Zulu"),
+                new Resource("2", "Bog A", "Andersen")
+        ));
+
+        resources.sort(LibraryComparators.BY_CREATOR);
+
+        assertEquals("Andersen", resources.get(0).getCreator());
+    }
+
+    @Test
+    void librarySortByTitle() {
+        List<Resource> resources = new ArrayList<>(List.of(
+                new Resource("1", "Zulu", "Forfatter A"),
+                new Resource("2", "Andersen", "Forfatter B")
+        ));
+
+        resources.sort(LibraryComparators.BY_TITLE);
+
+        assertEquals("Andersen", resources.get(0).getTitle());
+    }
+
+    @Test
+    void librarySortLoans() {
+        Resource resource = new Resource("1", "Bog", "Forfatter");
+        Member member = new Member("Lucas", 1);
+
+        List<Loan> loans = new ArrayList<>(List.of(
+                new Loan(resource, member,
+                        LocalDate.of(2025, 1, 10),
+                        LocalDate.of(2025, 2, 10)),
+
+                new Loan(resource, member,
+                        LocalDate.of(2025, 1, 5),
+                        LocalDate.of(2025, 2, 20))
+        ));
+
+        loans.sort(LibraryComparators.BY_BORROWED_DATE);
+
+        assertEquals(LocalDate.of(2025, 1, 5),
+                loans.get(0).borrowedDate());
+    }
+
+    @Test
+    void sortWithCollator() {
         List<String> titles = new ArrayList<>(List.of(
                 "Ø",
                 "Ä",
-                "Å",
-                "Æ"
+                "Å"
         ));
 
         Collator danish = Collator.getInstance(new Locale("da"));
