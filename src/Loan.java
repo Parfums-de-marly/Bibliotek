@@ -7,6 +7,10 @@ public record Loan(
         LocalDate dueDate
 ) implements Comparable<Loan> {
 
+    public LocalDate getBorrowedDate() {
+        return borrowedDate;
+    }
+
     public LocalDate getDueDate() {
         return dueDate;
     }
