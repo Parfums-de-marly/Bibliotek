@@ -9,7 +9,6 @@ public class Resource implements Comparable<Resource> {
         this.title = title;
         this.creator = creator;
 
-
     }
 
     @Override

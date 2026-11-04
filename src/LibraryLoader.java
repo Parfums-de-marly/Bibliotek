@@ -1,20 +1,15 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class LibraryLoader {
 
-    private final MemberCsvMapper memberMapper = new MemberCsvMapper();
-    private final BookCsvMapper bookMapper = new BookCsvMapper();
-    private final MovieCsvMapper movieMapper = new MovieCsvMapper();
-    private final AudioBookCsvMapper audioBookMapper = new AudioBookCsvMapper();
-    private final VideoGameCsvMapper videoGameMapper = new VideoGameCsvMapper();
-    private final LoanCsvMapper loanMapper = new LoanCsvMapper();
-
-
+    private final LibraryCsvMapper mapper = new LibraryCsvMapper();
     private final Path libraryDirectory;
 
     public LibraryLoader(Path libraryDirectory) {
@@ -22,102 +17,42 @@ public class LibraryLoader {
     }
 
     public List<Member> loadMembers() throws IOException {
-        List<Member> members = new ArrayList<>();
-        Path path = libraryDirectory.resolve("member.csv");
-
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                Member member = memberMapper.fromCsv(line);
-                members.add(member);
-            }
-        }
-
-        return members;
+        return readFile("member.csv", mapper::memberFromCsv);
     }
 
-    public List<Book> loadBooks() throws IOException{
-        List<Book> books = new ArrayList<>();
-
-        Path path = libraryDirectory.resolve("books.csv");
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                Book book = bookMapper.fromCsv(line);
-                books.add(book);
-            }
-        }
-
-        return books;
+    public List<Book> loadBooks() throws IOException {
+        return readFile("books.csv", mapper::bookFromCsv);
     }
 
-
-    public List<Movie> loadMovie() throws IOException{
-        List<Movie> movies = new ArrayList<>();
-
-        Path path = libraryDirectory.resolve("movie.csv");
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                Movie movie = movieMapper.fromCsv(line);
-                movies.add(movie);
-            }
-        }
-
-        return movies;
+    public List<Movie> loadMovie() throws IOException {
+        return readFile("movie.csv", mapper::movieFromCsv);
     }
 
-    public List<AudioBook> loadAudioBook() throws IOException{
-        List<AudioBook> audioBooks = new ArrayList<>();
-
-        Path path = libraryDirectory.resolve("audiobook.csv");
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                AudioBook audioBook = audioBookMapper.fromCsv(line);
-                audioBooks.add(audioBook);
-            }
-        }
-
-        return audioBooks;
+    public List<AudioBook> loadAudioBook() throws IOException {
+        return readFile("audiobook.csv", mapper::audioBookFromCsv);
     }
 
-
-    public List<VideoGame> loadVideoGame() throws IOException{
-        List<VideoGame> videoGames = new ArrayList<>();
-
-        Path path = libraryDirectory.resolve("videogame.csv");
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                VideoGame videoGame = videoGameMapper.fromCsv(line);
-                videoGames.add(videoGame);
-            }
-        }
-
-        return videoGames;
+    public List<VideoGame> loadVideoGame() throws IOException {
+        return readFile("videogame.csv", mapper::videoGameFromCsv);
     }
 
     public List<Loan> loadLoans(Library library) throws IOException {
-        List<Loan> loans = new ArrayList<>();
-        Path path = libraryDirectory.resolve("loans.csv");
+        return readFile("loans.csv",
+                line -> mapper.loanFromCsv(line, library));
+    }
+
+    private <T> List<T> readFile(String fileName, Function<String, T> mapperFunction) throws IOException {
+        List<T> result = new ArrayList<>();
+        Path path = libraryDirectory.resolve(fileName);
 
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                Loan loan = loanMapper.fromCsv(line, library);
-                loans.add(loan);
+                result.add(mapperFunction.apply(line));
             }
         }
 
-        return loans;
+        return result;
     }
-
-
-    }
+}
