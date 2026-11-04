@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,6 +39,8 @@ public class LibrarySaver {
     }
 
     private <T> void writeFile(String fileName, List<T> objects, Function<T, String> mapperFunction) throws IOException {
+        Files.createDirectories(libraryDirectory);
+
         Path path = libraryDirectory.resolve(fileName);
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {

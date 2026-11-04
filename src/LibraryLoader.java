@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,6 +43,10 @@ public class LibraryLoader {
     private <T> List<T> readFile(String fileName, Function<String, T> mapperFunction) throws IOException {
         List<T> result = new ArrayList<>();
         Path path = libraryDirectory.resolve(fileName);
+
+        if (!Files.exists(path)) {
+            return result;
+        }
 
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
