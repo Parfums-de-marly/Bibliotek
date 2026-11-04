@@ -1,8 +1,10 @@
 public class ConsoleUI {
     private final Library library;
+    private final LibrarySaver saver;
 
-    public ConsoleUI(Library library) {
+    public ConsoleUI(Library library, LibrarySaver saver) {
         this.library = library;
+        this.saver = saver;
     }
 
     public void start() {
@@ -26,7 +28,10 @@ public class ConsoleUI {
                 case "3" -> showAllLoans();
                 case "4" -> showResources();
                 case "5" -> showMemberLoans();
-                case "6" -> running = false;
+                case "6" -> {
+                    saveLibrary();
+                    running = false;
+                }
                 default -> IO.println("Ugyldigt valg.");
             }
         }
@@ -144,6 +149,19 @@ public class ConsoleUI {
 
         for (Loan loan : memberLoans) {
             IO.println(loan);
+        }
+    }
+
+    private void saveLibrary() {
+        try {
+            saver.saveMembers(library.getMembers());
+            saver.saveBooks(library.getResources().stream().filter(Book.class::isInstance).map(Book.class::cast).toList());
+            saver.saveMovie(library.getResources().stream().filter(Movie.class::isInstance).map(Movie.class::cast).toList());
+            saver.saveAudioBook(library.getResources().stream().filter(AudioBook.class::isInstance).map(AudioBook.class::cast).toList());
+            saver.saveVideoGame(library.getResources().stream().filter(VideoGame.class::isInstance).map(VideoGame.class::cast).toList());
+            saver.saveLoans(library.getLoans());
+        } catch (Exception e) {
+            IO.println("Kunne ikke gemme biblioteket: " + e.getMessage());
         }
     }
 }

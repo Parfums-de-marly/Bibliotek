@@ -5,11 +5,16 @@ public record Loan(
         Member member,
         LocalDate borrowedDate,
         LocalDate dueDate
-) {
+) implements Comparable<Loan> {
+
     public LocalDate getDueDate() {
         return dueDate;
     }
 
+    @Override
+    public int compareTo(Loan other) {
+        return this.dueDate.compareTo(other.dueDate);
+    }
 
     @Override
     public String toString() {
